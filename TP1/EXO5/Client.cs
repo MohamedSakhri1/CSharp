@@ -22,6 +22,9 @@ namespace EXO5
 
         public void CreateCompte(int numeroCompte, double soldeInitial = 0)
         {
+            if (compte != null)
+                throw new FieldAccessException("Le user a déjà un compte !");
+            // compte non trouvé
             compte = new Compte(numeroCompte, soldeInitial, this.Id);
             JsonUtils.StoreCompte(this.compte);
         }

@@ -10,8 +10,8 @@
   {
     "Id": 2,
     "Nom": "SAKHRI",
-    "Prenom": "Mohamed",
-    "Email": "exemple@email.com",
+    "Prenom": "Anass",
+    "Email": "exemple2@email.com",
     "Password": "password",
     "Role": 2
   }

@@ -12,19 +12,73 @@ namespace EXO5
     {
         static void Main(string[] args)
         {
-            //Client client = new Client("Sakhri", "Mohamed", "exemple@email.com", "password", Role.CLIENT);
-            //client.CreateCompte(2342, 2000);
+            try
+            {
+                Client client = Menu.Login();
+                if (client == null)
+                    return;
 
-            Client client = JsonUtils.GetClientById(1);
+                if (client.Role.Equals(Role.CLIENT))
+                {
+                    do
+                    {
+                        var responce = Menu.PrincipaleClient();
+                        int responceOperation = 0;
 
-            //client.Compte.Criditer(1234.55);
+                        switch (responce)
+                        {
+                            case 0: return;
+                            case 1:
+                                Menu.AjouterCompte(client);
+                                continue;
+                            case 2:
+                                responceOperation = Menu.OperationsSurCompte(client);
+                                break;
+                        }
 
-            //client.Compte.Debiter(3234);
+                        switch(responceOperation)
+                        {
+                            case 0: continue;
+                            case 1: Menu.Crediter(client.Compte);
+                                continue;
+                            case 2: Menu.Debiter(client.Compte);
+                                continue;
+                            case 3: Menu.Historique(client.Compte);
+                                continue;
+                            case 4: Menu.Verser(client.Compte);
+                                continue;
 
-            //client.Compte.Criditer(100);
+                        }
 
-            client.Compte.Transactions.ForEach(transaction => {Console.WriteLine(transaction);});
+
+
+                    } while (true);
+                    
+                } 
+                
+                else if (client.Role.Equals(Role.ADMIN))
+                {
+                    var responce = Menu.PrincipaleAdmin();
+
+                    switch (responce)
+                    {
+                        case 0: return;
+                        case 1:
+                            Menu.AjouterClient();
+                            break;
+
+
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("/!\\ " + ex.Message);
+            }
 
         }
+
     }
 }

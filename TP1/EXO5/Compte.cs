@@ -42,25 +42,25 @@ namespace EXO5
         }
 
 
-        public void Criditer(double montant)
+        public void Crediter(double montant)
         {
             if (montant < 0)
-                return;
+                throw new Exception("Montant negative !");
             solde += montant;
             
             Transaction transaction = new Transaction(OperationBancaire.CRIDITER,solde, montant);
 
             transactions.Add(transaction);
 
-            JsonUtils.UpdateCompte(numero,this);
+            JsonUtils.UpdateCompte(this);
         }
 
         public void Debiter(double montant)
         {
             if (montant < 0)
-                return;
+                throw new Exception("Montant negative !");
             if (solde < montant)
-                return;
+                throw new Exception("Solde insufisant !");
 
             solde -= montant;
 
@@ -68,7 +68,25 @@ namespace EXO5
             transactions.Add(transaction);
 
 
-            JsonUtils.UpdateCompte(numero, this);
+            JsonUtils.UpdateCompte(this);
+        }
+
+        public void Verser(double montant, int numeroCompteReceptrice)
+        {
+            try
+            {
+                Compte compteReceptrice = JsonUtils.GetCompteByNumero(numeroCompteReceptrice);
+
+                if (compteReceptrice == null)
+                    throw new Exception("Compte introuvable !");
+
+                this.Debiter(montant);
+                compteReceptrice.Crediter(montant);
+
+            } catch (Exception ex) {
+                    throw ex;
+            }
+
         }
 
     }

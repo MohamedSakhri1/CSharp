@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -17,10 +18,13 @@ internal static class JsonUtils
     }
     public static void FillFile(string json, string filePath)
     {
-        if (File.Exists(filePath))
+        try
         {
+            //if (File.Exists(filePath)) { }
+            
             File.WriteAllText(filePath, json);
         }
+        catch (Exception ex) { throw new Exception("Erreur dans louverture de fichier JSON !"); }
     }
 
     public static List<Client> GetClients()
@@ -34,13 +38,31 @@ internal static class JsonUtils
         return JsonSerializer.Deserialize<List<Client>>(json);
     }
 
+    public static Client GetClientByMail(string mail)
+    {
+        var clients = GetClients();
+        try
+        {
+            var myClient = clients.FirstOrDefault(client => client.Email == mail);
+            myClient.Compte = GetUserCompte(myClient.Id);
+
+            return myClient;
+        }
+        catch (Exception ex) { return clients.FirstOrDefault(client => client.Email == mail); }
+    }
+
     public static Client GetClientById(int id)
     {
         var clients = GetClients();
-        var myClient =  clients.FirstOrDefault(client => client.Id == id);
-        myClient.Compte = GetUserCompte(myClient.Id);
+        try
+        {
+            var myClient = clients.First(client => client.Id == id);
+            myClient.Compte = GetUserCompte(myClient.Id);
 
-        return myClient;
+            return myClient;
+        }
+        catch (InvalidOperationException ex) { throw new Exception("Pas du client avec id=" + id + " !"); }
+        catch (Exception ex) { return clients.First(client => client.Id == id); }
     }
     public static void StoreClient(Client client)
     {
@@ -49,7 +71,6 @@ internal static class JsonUtils
 
         FillFile(ToJson(clients), USERS_JSON_PATH);
     }
-
 
     public static List<Compte> GetComptes()
     {
@@ -62,10 +83,29 @@ internal static class JsonUtils
 
         return JsonSerializer.Deserialize<List<Compte>>(json);
     }
+
+
+
+    public static Compte GetCompteByNumero(int numero)
+    {
+        try
+        {
+            var comptes = GetComptes();
+            return comptes.First(compte => compte.Numero == numero);
+        }
+        catch (Exception ex) {
+            throw new Exception("Pas du compte avec numero=" + numero + " !");
+        }
+    }
+
     public static Compte GetUserCompte(int idClient)
     {
-        var comptes = GetComptes();
-        return comptes.FirstOrDefault(compte => compte.ClientId == idClient);
+        try
+        {
+            var comptes = GetComptes();
+            return comptes.First(compte => compte.ClientId == idClient);
+        }
+        catch (Exception ex) { throw new Exception("Pas du compte pour le User avec id=" + idClient + " !"); }
     }
 
     public static void StoreCompte(Compte compte)
@@ -76,23 +116,18 @@ internal static class JsonUtils
         FillFile(ToJson(comptes), COMPTES_JSON_PATH);
     }
 
-    public static void UpdateCompte(int compteNumero, Compte newCompte)
+    public static void UpdateCompte(Compte newCompte)
     {
-        var comptes = GetComptes();
-        Compte oldCompte = comptes.FirstOrDefault(compte => compte.Numero == compteNumero);
-
-        if (oldCompte != null)
+        try
         {
-            comptes.Remove(oldCompte);
-
-            newCompte.Numero = compteNumero;
-            newCompte.ClientId = oldCompte.ClientId;
-
-            oldCompte = newCompte;
-
+            List<Compte> comptes = GetComptes();
+            Compte oldCompte = GetCompteByNumero(newCompte.Numero);
+            
+            comptes.RemoveAll(compte => compte.Numero == newCompte.Numero);
             comptes.Add(newCompte);
+            
+            FillFile(ToJson(comptes), COMPTES_JSON_PATH);
         }
-
-        FillFile(ToJson(comptes), COMPTES_JSON_PATH);
+        catch (Exception ex) { throw ex; }
     }
 }

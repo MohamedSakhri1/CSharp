@@ -81,6 +81,7 @@
     <Compile Include="Compte.cs" />
     <Compile Include="Enums\OperationBancaire.cs" />
     <Compile Include="JsonUtils.cs" />
+    <Compile Include="Menu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Enums\Role.cs" />

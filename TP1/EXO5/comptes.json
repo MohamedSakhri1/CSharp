@@ -1,45 +1,57 @@
 [
   {
-    "Numero": 2342,
-    "Solde": 0.5500000000001819,
+    "Numero": 231,
+    "Solde": 4000,
     "ClientId": 2,
     "Transactions": [
       {
-        "Montant": 1234.55,
-        "Solde": 3234.5500000000002,
-        "TypeOperation": 1,
-        "Date": "25/02/2025 00:47:38"
+        "Montant": 500,
+        "Solde": 500,
+        "TypeOperation": 2,
+        "Date": "25/02/2025 11:51:17"
       },
       {
-        "Montant": 3234,
-        "Solde": 0.5500000000001819,
+        "Montant": 500,
+        "Solde": 0,
         "TypeOperation": 2,
-        "Date": "25/02/2025 00:47:38"
+        "Date": "25/02/2025 12:03:46"
+      },
+      {
+        "Montant": 5000,
+        "Solde": 5000,
+        "TypeOperation": 1,
+        "Date": "25/02/2025 12:05:08"
+      },
+      {
+        "Montant": 1000,
+        "Solde": 4000,
+        "TypeOperation": 2,
+        "Date": "25/02/2025 12:06:17"
       }
     ]
   },
   {
     "Numero": 2341,
-    "Solde": 100.55000000000018,
+    "Solde": 994810,
     "ClientId": 1,
     "Transactions": [
       {
-        "Montant": 1234.55,
-        "Solde": 3234.5500000000002,
-        "TypeOperation": 1,
-        "Date": "25/02/2025 00:47:30"
-      },
-      {
-        "Montant": 3234,
-        "Solde": 0.5500000000001819,
+        "Montant": 200,
+        "Solde": 999800,
         "TypeOperation": 2,
-        "Date": "25/02/2025 00:47:30"
+        "Date": "25/02/2025 15:38:23"
       },
       {
-        "Montant": 100,
-        "Solde": 100.55000000000018,
+        "Montant": 5000,
+        "Solde": 994800,
+        "TypeOperation": 2,
+        "Date": "25/02/2025 15:38:54"
+      },
+      {
+        "Montant": 10,
+        "Solde": 994810,
         "TypeOperation": 1,
-        "Date": "25/02/2025 00:56:57"
+        "Date": "25/02/2025 15:39:38"
       }
     ]
   }
