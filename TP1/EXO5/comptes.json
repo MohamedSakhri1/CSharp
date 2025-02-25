@@ -1,0 +1,46 @@
+[
+  {
+    "Numero": 2342,
+    "Solde": 0.5500000000001819,
+    "ClientId": 2,
+    "Transactions": [
+      {
+        "Montant": 1234.55,
+        "Solde": 3234.5500000000002,
+        "TypeOperation": 1,
+        "Date": "25/02/2025 00:47:38"
+      },
+      {
+        "Montant": 3234,
+        "Solde": 0.5500000000001819,
+        "TypeOperation": 2,
+        "Date": "25/02/2025 00:47:38"
+      }
+    ]
+  },
+  {
+    "Numero": 2341,
+    "Solde": 100.55000000000018,
+    "ClientId": 1,
+    "Transactions": [
+      {
+        "Montant": 1234.55,
+        "Solde": 3234.5500000000002,
+        "TypeOperation": 1,
+        "Date": "25/02/2025 00:47:30"
+      },
+      {
+        "Montant": 3234,
+        "Solde": 0.5500000000001819,
+        "TypeOperation": 2,
+        "Date": "25/02/2025 00:47:30"
+      },
+      {
+        "Montant": 100,
+        "Solde": 100.55000000000018,
+        "TypeOperation": 1,
+        "Date": "25/02/2025 00:56:57"
+      }
+    ]
+  }
+]
