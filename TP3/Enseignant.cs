@@ -54,6 +54,11 @@ namespace TP3
             groupesEtudiants.Add(groupe.Nom, groupe.Etudiants);
         }
 
+        public override string ToString()
+        {
+            return "Enseignant de code : " + code + "\n" ;
+        }
+
         public string Grade
         {
             get { return this.grade; }
